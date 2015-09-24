@@ -114,11 +114,14 @@ add_action( 'widgets_init', 'brandnewtheme_widgets_init' );
  * Enqueue scripts and styles.
  */
 function brandnewtheme_scripts() {
-	wp_enqueue_style( 'brandnewtheme-style', get_stylesheet_uri() );
+	// Random number converted to string
+	$random_version = rand(1,99);
 
-	wp_enqueue_script( 'brandnewtheme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
+	// Random version number for staging site cache busting, remove in production
+	wp_enqueue_style( 'brandnewtheme-style', get_stylesheet_uri(), '', strval($random_version) );
 
-	wp_enqueue_script( 'brandnewtheme-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
+	// Random version number for staging site cache busting, remove in production
+	wp_enqueue_script( 'brandnewtheme-js-build', get_template_directory_uri() . '/assets/javascript/build.js', array( jquery ), strval($random_version), true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -150,3 +153,8 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+/**
+ * Load navwalker for bootstrap navigation
+ */
+require get_template_directory() . '/inc/wp_bootstrap_navwalker.php';
