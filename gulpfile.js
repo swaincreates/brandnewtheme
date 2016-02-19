@@ -1,4 +1,4 @@
- /* 
+ /*
     Require Dependencies
     ========================================================================== */
     var gulp          = require('gulp'),
@@ -13,7 +13,7 @@
         uglify        = require('gulp-uglify');
 
 
- /* 
+ /*
     Error Handling - needs work
     ========================================================================== */
     var errorAlert = function(err) {
@@ -21,7 +21,7 @@
     };
 
 
- /* 
+ /*
     SASS Compilation / Minification Task
     ========================================================================== */
     gulp.task('sass', function () {
@@ -41,12 +41,12 @@
     });
 
 
- /* 
+ /*
     JS Concat and Uglify
     ========================================================================== */
     gulp.task('scripts', function(){
       gulp.src([
-        './assets/javascript/libs/**/*.js', 
+        './assets/javascript/libs/**/*.js',
         './assets/javascript/scripts/**/*.js',
         ])
         .pipe(plumber({
@@ -61,11 +61,11 @@
     });
 
 
- /* 
+ /*
     Watch Task: SASS, JS, PHP
     ========================================================================== */
     gulp.task('watch', function () {
-  
+
       // Start livereload server
       livereload.listen();
 
@@ -73,7 +73,7 @@
       gulp.watch('./assets/stylesheets/sass/**/*.scss', ['sass']);
 
       // JS Watch
-      gulp.watch('./assets/javascript/scripts/**/*.js'), ['scripts']);
+      gulp.watch('./assets/javascript/scripts/**/*.js', ['scripts']);
 
       // PHP Watch and Livereload
       gulp.watch(['./**/*.php']).on('change', function(file) {
@@ -83,12 +83,7 @@
     }); // End Watch Task
 
 
- /* 
+ /*
     Default Gulp Command
     ========================================================================== */
     gulp.task('default', ['sass', 'scripts', 'watch']);
-
-
-
- 
- 
